@@ -6,8 +6,8 @@ from Process_Details import ProcessDetails
 
 from time import gmtime, strftime
    
-log_file = open('processList.txt', 'a+')
-status_file = open('Status_Log.txt', 'a+')
+log_file = open('processList.csv', 'a+')
+status_file = open('Status_Log.csv', 'a+')
 name = os.getenv('COMPUTERNAME')
 y = {}
 m = {}

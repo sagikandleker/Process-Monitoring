@@ -11,7 +11,7 @@ class ProcessDetails:
     """
     
     def getAll(self):
-        return self.current_time +' '+ self.computer_name +' '+ self.create_time +' '+ self.process_name +' '+ self.pid
+        return self.current_time+','+self.computer_name+','+self.create_time+','+self.process_name+','+self.pid
     
     def __init__(self, cut, con, crt, prn, pid, status):
         self.current_time = cut
