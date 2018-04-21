@@ -10,26 +10,42 @@ class ProcessDetails:
         This struct of Process with the Details about him (for each process).
     """
     
+    pid = 0
+    process_name = ''
+    current_time = ''
+    create_time = ''
+    computer_name = ''
+    process_status = ''
+    
     def getAll(self):
-        return self.current_time+','+self.computer_name+','+self.create_time+','+self.process_name+','+self.pid
+        return (self.pid,self.process_name,self.current_time,self.create_time,self.computer_name,self.process_status)
     
-    def __init__(self, cut, con, crt, prn, pid, status):
-        self.current_time = cut
-        self.computer_name = con
-        self.create_time = crt
-        self.process_name = prn
+    def __init__(self, pid, process_name, current_time, create_time, computer_name, process_status):
         self.pid = pid
-        self.status = status
-        
-        
-    def getCurrent(self):
-        return str(self.current_time)
+        self.process_name = process_name
+        self.current_time = current_time
+        self.create_time = create_time
+        self.computer_name = computer_name
+        self.process_status = process_status
     
-    def getComputerName(self):
-        return str(self.computer_name)
+    def __str__(self):
+        return self.pid+','+self.process_name+','+self.current_time+','+self.create_time+','+self.computer_name+','+self.process_status
     
+    def setStatus(self, s):
+        self.process_status = s
+        
     def getStatus(self):
-        return str(self.status)
+        return self.process_status
     
-    def setStatus(self, value):
-        self.status = value
+    def getPid(self):
+        return self.pid
+    
+    def getName(self):
+        return self.process_name
+    
+    def setCurrentTime(self, t):
+        self.current_time = t
+        
+    def __getitem__(self):
+        return (self.pid,self.process_name,self.current_time,self.create_time,self.computer_name,self.process_status)
+    
