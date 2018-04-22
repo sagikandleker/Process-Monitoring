@@ -31,7 +31,7 @@ def write_StatusFile(status_file, process_details, process_status):
     
     process_details.setStatus(process_status)
     interfacePrint(process_details.getPid(), process_details.getName(), process_details.getStatus())
-    print strftime("%d/%m/%Y %H:%M:%S")
+
     if(process_status == 'Closed'):
         process_details.setCurrentTime(strftime("%d/%m/%Y %H:%M:%S"))
     
