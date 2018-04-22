@@ -29,14 +29,14 @@ def write_StatusFile(status_file, process_details, process_status):
         Example - "05/04/2018 10:23:58 DESKTOP-HB3DSMF 05/04/2018 10:23:52 ts3client_win64.exe 3084 Opened"
     """
     
-    process_details.setStatus(process_status)
-    interfacePrint(process_details.getPid(), process_details.getName(), process_details.getStatus())
+    process_details.set_Process_Status(process_status)
+    interfacePrint(process_details.get_Process_Pid(), process_details.get_Process_Name(), process_details.get_Process_Status())
 
     if(process_status == 'Closed'):
-        process_details.setCurrentTime(strftime("%d/%m/%Y %H:%M:%S"))
+        process_details.set_Process_CurrentTime(strftime("%d/%m/%Y %H:%M:%S"))
     
     status_file.write(str(process_details)+'\n')
-    process_details.setStatus('running')
+    process_details.set_Process_Status('running')
     
     status_file.flush()
 
