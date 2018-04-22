@@ -251,7 +251,7 @@ def pattern_Value(value):
             counter += 1
             
 def file_Found():
-    if(not(os.path.isfile('~'+"//processList.csv"))):
+    if(not(os.path.isfile('.'+"//processList.csv"))):
         print "The file is not was created, Please make sure that program ran before on Process Monitoring. (Restart and press 1)"
         sys.exit(1)
                   
