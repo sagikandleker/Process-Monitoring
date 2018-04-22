@@ -28,24 +28,45 @@ class ProcessDetails:
         self.computer_name = computer_name
         self.process_status = process_status
     
-    def __str__(self):
-        return self.pid+','+self.process_name+','+self.current_time+','+self.create_time+','+self.computer_name+','+self.process_status
-    
-    def setStatus(self, s):
-        self.process_status = s
-        
-    def getStatus(self):
-        return self.process_status
-    
-    def getPid(self):
+    def get_Process_Pid(self):
         return self.pid
     
-    def getName(self):
+    def set_Process_Pid(self, value):
+        self.pid = value
+        
+    def get_Process_Name(self):
         return self.process_name
     
-    def setCurrentTime(self, t):
-        self.current_time = t
+    def set_Process_Name(self, value):
+        self.process_name = value
+    
+    def get_Process_CurrentTime(self):
+        return self.current_time
+    
+    def set_Process_CurrentTime(self, value):
+        self.current_time = value
         
+    def get_Process_CreateTime(self):
+        return self.create_time
+    
+    def set_Process_CreateTime(self, value):
+        self.create_time = value
+    
+    def get_Computer_Name(self):
+        return self.computer_name
+    
+    def set_Computer_Name(self, value):
+        self.computer_name = value
+        
+    def set_Process_Status(self, value):
+        self.process_status = value
+        
+    def get_Process_Status(self):
+        return self.process_status
+    
+    def __str__(self):
+        return str(self.pid)+','+str(self.process_name)+','+str(self.current_time)+','+str(self.create_time)+','+str(self.computer_name)+','+str(self.process_status)
+    
     def __getitem__(self):
         return (self.pid,self.process_name,self.current_time,self.create_time,self.computer_name,self.process_status)
     
