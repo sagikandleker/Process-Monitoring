@@ -103,15 +103,17 @@ def monitor(samplingTime):
     old_sample = {}
     new_sample = {}
     build_Dictionary(old_sample)
-
-    while 1:
-        print '-------------------------'
-        write_LogFile(old_sample, log_file)
+    try:
+        while 1:
+            print '-------------------------'
+            write_LogFile(old_sample, log_file)
             
-        time.sleep(samplingTime)
-        build_Dictionary(new_sample)
-        compare_1(status_file, old_sample, new_sample)
-        swap(old_sample, new_sample)
+            time.sleep(samplingTime)
+            build_Dictionary(new_sample)
+            compare_1(status_file, old_sample, new_sample)
+            swap(old_sample, new_sample)
+    except KeyboardInterrupt:
+        sys.exit(1)
 
 def compare_2(event_1_dict, event_2_dict):
      
@@ -159,7 +161,7 @@ def exiting_File():
     else:
         log_file = open('processList.csv', 'a+')
             
-    if(not(os.path.isfile('.'+"//status_Log.csv"))):
+    if(not(os.path.isfile('.'+"//Status_Log.csv"))):
         status_file = open('Status_Log.csv', 'a+')
         write_Headers(status_file)
     else:
@@ -185,10 +187,10 @@ def build_Dictionary(value):
             real_create_time = check_Creation_Time(k)
             
             if k.status() == 'running':
-                
+                   
                 x = ProcessDetails(str(i), k.name(), current_time, real_create_time, computer_name, k.status())
-                
                 value[i] = x
+                
         except Exception:
             pass
 
@@ -249,7 +251,7 @@ def pattern_Value(value):
             counter += 1
             
 def file_Found():
-    if(not(os.path.isfile('.'+"//processList.csv"))):
+    if(not(os.path.isfile('~'+"//processList.csv"))):
         print "The file is not was created, Please make sure that program ran before on Process Monitoring. (Restart and press 1)"
         sys.exit(1)
                   
@@ -293,7 +295,7 @@ def Interface():
             print("Second sample time is: %s" % event_2)
             print '-------------------------'
             
-            filename = '.\\processList.csv'
+            filename = '.'+'//processList.csv'
             read_LogFile(event_1, event_2, filename)
             flag = False
 
