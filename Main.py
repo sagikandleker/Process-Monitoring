@@ -7,10 +7,7 @@ import datetime
 from datetime import datetime
 from Process_Details import *
 from Write_CSV_File import *
-from Thread_Watcher import MyHandler
 from time import gmtime, strftime
-from watchdog.observers import Observer
-from watchdog.events import FileSystemEventHandler
 
 computer_name = os.getenv('COMPUTERNAME')
 modified_time = ""
@@ -99,34 +96,23 @@ def swap(old_sample, new_sample):
 def monitor(samplingTime):
     
     """ Main loop for application. """
-    
-    event_handler = MyHandler()
-    observer = Observer()
-    observer.schedule(event_handler, path='.', recursive = False)
-    
+
     exiting_File()
     log_file = open('processList.csv', 'a+')
     status_file = open('Status_Log.csv', 'a+')
     old_sample = {}
     new_sample = {}
     build_Dictionary(old_sample)
-    observer.start()
 
-    try:
-        while 1:
-            print '-------------------------'
-            write_LogFile(old_sample, log_file)
+    while 1:
+        print '-------------------------'
+        write_LogFile(old_sample, log_file)
             
-            time.sleep(samplingTime)
-            build_Dictionary(new_sample)
-            compare_1(status_file, old_sample, new_sample)
-            swap(old_sample, new_sample)
-                
-    except KeyboardInterrupt:
-        observer.stop()
-            
-    observer.join()
-        
+        time.sleep(samplingTime)
+        build_Dictionary(new_sample)
+        compare_1(status_file, old_sample, new_sample)
+        swap(old_sample, new_sample)
+
 def compare_2(event_1_dict, event_2_dict):
      
     # This loop will find if Process is Closed.    
@@ -204,7 +190,7 @@ def build_Dictionary(value):
                 
                 value[i] = x
         except Exception:
-            print('Exeption Catch!')
+            pass
 
 def accepted_Value(value):
     
