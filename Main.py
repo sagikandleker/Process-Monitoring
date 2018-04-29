@@ -115,20 +115,23 @@ def monitor(samplingTime):
     except KeyboardInterrupt:
         sys.exit(1)
 
+def printLine(line):
+    print line[0] +' | '+ line[1] + ' | ' + line[5] + ' | '+line[2];
+
 def compare_2(event_1_dict, event_2_dict):
      
     # This loop will find if Process is Closed.    
     for i in event_1_dict:
         if i not in event_2_dict:
             event_1_dict[i][5] = 'Closed'
-            print event_1_dict[i]
+            printLine(event_1_dict[i])
             
     
     # This loop will find if Process is Opened. 
     for i in event_2_dict:
         if i not in event_1_dict:
             event_2_dict[i][5] = 'Opened'
-            print event_2_dict[i]
+            printLine(event_2_dict[i])
     
 def time_Format(create_time):
     fixed_create_time = create_time[8:10]+'/'+create_time[5:7]+'/'+create_time[0:4]+' '+create_time[11:20]
@@ -186,7 +189,7 @@ def build_Dictionary(value):
             
             real_create_time = check_Creation_Time(k)
             
-            if k.status() == 'running':
+            if k.status() == 'running' or k.status() == 'sleeping':
                    
                 x = ProcessDetails(str(i), k.name(), current_time, real_create_time, computer_name, k.status())
                 value[i] = x
@@ -254,18 +257,16 @@ def file_Found():
     if(not(os.path.isfile('.'+"//processList.csv"))):
         print "The file is not was created, Please make sure that program ran before on Process Monitoring. (Restart and press 1)"
         sys.exit(1)
-                  
+    
 def Interface():
     
     """ Interface for user """
       
     flag = True
-    print("Hello! This is a Processes Monitoring program.\n")
+    print("---Processes Monitoring program---")
     
     while flag:
-        ans = accepted_Value(raw_input("Press 1 for starting processes monitoring || Press 2 for inserting time samples || Press 0 or quit for exit Anywhere: "))
-        
-        
+        ans = accepted_Value(raw_input("Press 1 for starting processes monitoring || Press 2 to compare time samples || Press 0, quit or CTRL+C for exit Anywhere: "))
         
         if(ans == 0):
             print("The program closed.")
@@ -285,18 +286,18 @@ def Interface():
             status_file.close()
         
         elif(ans == 2):
+            file_Found()
             event_1 = pattern_Value(raw_input("Write the date and time for the first event you want to compare (Example, 13/04/2018 12:35:29): "))
             event_2 = pattern_Value(raw_input("Write the date and time for the second event you want to compare (Example, 14/04/2018 22:49:18): "))
             
-            file_Found()
-            
-            print("The program starting work")
+            print("\nThe program starting work")
             print("First sample time is: %s" % event_1)
             print("Second sample time is: %s" % event_2)
             print '-------------------------'
-            
+                
             filename = '.'+'//processList.csv'
             read_LogFile(event_1, event_2, filename)
-            flag = False
+            
+                
 
 Interface()
