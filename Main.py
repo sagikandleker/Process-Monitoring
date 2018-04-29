@@ -298,6 +298,4 @@ def Interface():
             filename = '.'+'//processList.csv'
             read_LogFile(event_1, event_2, filename)
             
-                
-
 Interface()
